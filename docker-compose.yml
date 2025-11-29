@@ -1,0 +1,36 @@
+version: '3.9'
+services:
+  smartassist-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: smartassist-ai
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - ZOHO_CRM_TOKEN=${ZOHO_CRM_TOKEN}
+      - ZOHO_DESK_TOKEN=${ZOHO_DESK_TOKEN}
+      - OPENAI_KEY=${OPENAI_KEY}
+      - WHATSAPP_TOKEN=${WHATSAPP_TOKEN}
+    volumes:
+      - ./backend:/app/backend
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/api/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    networks:
+      - smartassist-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  smartassist-network:
+    driver: bridge
