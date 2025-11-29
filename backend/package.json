@@ -1,0 +1,26 @@
+{
+  "name": "smartassist-ai",
+  "version": "1.0.0",
+  "description": "Multi-mode AI support engine with Zoho CRM/Desk integration",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo 'Tests go here'"
+  },
+  "keywords": ["support", "chatbot", "ai", "zoho", "lead-scoring"],
+  "author": "Rathinam Tech",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
